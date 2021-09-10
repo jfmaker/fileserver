@@ -17,7 +17,9 @@ func fileHandler(w http.ResponseWriter, r *http.Request) {
                     w.Header().Set("Content-Type", s[1])
             }
         }
-
+        w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
+        w.Header().Set("Pragma", "no-cache")
+        w.Header().Set("Expires", "0")
         fileServer.ServeHTTP(w, r)
         log.Printf("- [%s %s] [%s]", r.Method, r.RequestURI, r.UserAgent())
 
